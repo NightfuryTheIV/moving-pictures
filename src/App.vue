@@ -7,7 +7,9 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <div class="wrapper">
       <nav>
-
+        <RouterLink to="/">Moving Pictures</RouterLink>
+        <RouterLink to="/about">About (soon to be search bar)</RouterLink>
+        <RouterLink to="/profile">Profile (soon to be profile picture)</RouterLink>
       </nav>
     </div>
   </header>
