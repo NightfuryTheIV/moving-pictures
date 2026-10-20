@@ -1,7 +1,14 @@
 const BASE_URL = 'https://api.themoviedb.org/3'
 export const IMG_URL = 'https://image.tmdb.org/t/p'
 
-console.log('TOKEN:', import.meta.env.VITE_TMDB_TOKEN)
+const creditsCache = new Map()
+
+export async function getCredits(id) {
+  if (creditsCache.has(id)) return creditsCache.get(id)
+  const data = await request(`/movie/${id}/credits`)
+  creditsCache.set(id, data)
+  return data
+}
 
 async function request(path, params = {}) {
   const query = new URLSearchParams({ language: 'en-US', ...params })

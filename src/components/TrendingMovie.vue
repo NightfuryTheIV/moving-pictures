@@ -1,18 +1,31 @@
 <script setup>
-    import { posterUrl } from '@/api/tmdb.js'
-    const props = defineProps({
-        movie: {
-            type: Object,
-            required: true
-        }
-    })
+import { ref, onMounted } from 'vue'
+import { posterUrl, getCredits } from '@/api/tmdb.js'
+
+const props = defineProps({
+  movie: { type: Object, required: true },
+})
+
+const director = ref('')
+
+onMounted(async () => {
+  try {
+    const credits = await getCredits(props.movie.id)
+    director.value = credits.crew
+      .filter((person) => person.job === 'Director')
+      .map((person) => person.name)
+      .join(', ')
+  } catch (error) {
+    console.error('Error fetching credits:', error)
+  }
+})
 </script>
 
 <template>
     <RouterLink :to="`/movie/${movie.id}`" class="movie-card">
         <img :src="posterUrl(movie.poster_path, 'w342')" :alt="movie.title" class="movie-poster" />
         <h2 class="movie-title">{{ movie.title }}</h2>
-        <p class="movie-producer">{{ movie.release_date?.slice(0, 4) }}</p>
+        <p class="movie-producer">{{ director }}</p>
     </RouterLink>
 </template>
 
@@ -35,18 +48,18 @@ img {
   display: block;
   object-fit: cover;
   border-radius: 6px;
-  background: #222; /* shows while the image loads */
+  margin-bottom: 20px;
 }
 
 h2 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 p {
     margin: 0;
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: #666;
 }
 </style>
