@@ -42,9 +42,9 @@
     <section class="trending-movies">
       <h1>Trending Movies</h1>
       <div class="movie-list">
-        <TrendingMovie v-for="movie in trendingMovies" :key="movie.id" :movie="movie" />
+        <TrendingMovie v-for="movie in visibleMovies" :key="movie.id" :movie="movie" />
       </div>
-      
+
       <button>
         <span v-if="more" @click="showMore">Show More</span>
         <span v-else>No More Movies</span>
@@ -69,6 +69,8 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
   }
 
   button {
@@ -81,10 +83,10 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
   }
 
-  .movie-list, .activity-list {
+  .activity-list {
     margin-top: 2rem;
     display: flex;
+    gap: 1rem;
     flex-direction: row;
-    width: 100%;
   }
 </style>
