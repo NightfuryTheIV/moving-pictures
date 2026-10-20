@@ -45,10 +45,8 @@
         <TrendingMovie v-for="movie in visibleMovies" :key="movie.id" :movie="movie" />
       </div>
 
-      <button>
-        <span v-if="more" @click="showMore">Show More</span>
-        <span v-else>No More Movies</span>
-      </button>
+      <button v-if="more" @click="showMore">Show More</button>
+      <p v-else>No more movies to show.</p>
     </section>
 
     <section class="friend-activity">
@@ -63,6 +61,7 @@
 <style scoped>
   .home-view {
     width: 100%;
+    font-family: 'Roboto', sans-serif;
   }
 
   .movie-list {
@@ -77,12 +76,7 @@
     display: block;
     margin: 2rem auto 0;
   }
-
-  * {
-    font-family: 'Roboto', sans-serif;
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-  }
-
+  
   .activity-list {
     margin-top: 2rem;
     display: flex;

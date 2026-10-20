@@ -10,9 +10,9 @@
 
 <template>
     <RouterLink :to="`/movie/${movie.id}`" class="movie-card">
-        <img :src="posterUrl(movie.poster_path, 'w500')" :alt="movie.title" class="movie-poster" />
+        <img :src="posterUrl(movie.poster_path, 'w342')" :alt="movie.title" class="movie-poster" />
         <h2 class="movie-title">{{ movie.title }}</h2>
-        <p class="movie-producer">{{ movie.producer }}</p>
+        <p class="movie-producer">{{ movie.release_date?.slice(0, 4) }}</p>
     </RouterLink>
 </template>
 
@@ -40,13 +40,13 @@ img {
 
 h2 {
     margin: 0;
-    font-size: 32px;
+    font-size: 1rem;
     font-weight: bold;
 }
 
 p {
     margin: 0;
-    font-size: 24px;
+    font-size: 0.85rem;
     color: #666;
 }
 </style>
