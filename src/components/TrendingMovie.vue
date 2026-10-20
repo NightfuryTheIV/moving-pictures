@@ -1,4 +1,5 @@
 <script setup>
+    import { posterUrl } from '@/api/tmdb.js'
     const props = defineProps({
         movie: {
             type: Object,
@@ -9,13 +10,21 @@
 
 <template>
     <div class="movie-card">
-        <img :src="movie.poster" :alt="movie.title" class="movie-poster" />
+        <img :src="posterUrl(movie.poster_path, 'w342')" :alt="movie.title" class="movie-poster" />
         <h2 class="movie-title">{{ movie.title }}</h2>
         <p class="movie-description">{{ movie.producer }}</p>
     </div>
 </template>
 
 <style scoped>
+img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #222; /* shows while the image loads */
+}
+
 .movie-card {
     border: 1px solid #ccc;
     border-radius: 8px;
